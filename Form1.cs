@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Sudoku
 {
@@ -14,6 +15,8 @@ namespace Sudoku
     {
         TileLabel[,] tiles = new TileLabel[9, 9];
         string[] numButtons = new string[10];
+        string[,] puzzle = new string[9, 9];
+        string[,] solution = new string[9, 9];
         public frmMain()
         {
             InitializeComponent();
@@ -134,9 +137,7 @@ namespace Sudoku
             if (!tile.selected)
             {
                 tile.selected = true;
-                tile.BackColor = Color.Red;
-                for (int a = 0; a < 9; a++)
-                    tile.hintsLabel[a].BackColor = Color.Red;
+                tile.BackColor = Color.Orange;
                 for (int i = 0; i < 9; i++)
                     for (int j = 0; j < 9; j++)
                     {
@@ -147,14 +148,10 @@ namespace Sudoku
                                 if (!tiles[i, k].selected)
                                 {
                                     tiles[i, k].BackColor = Color.Yellow;
-                                    for (int a = 0; a < 9; a++)
-                                        tiles[i, k].hintsLabel[a].BackColor = Color.Yellow;
                                 }
                                 if (!tiles[k, j].selected)
                                 {
                                     tiles[k, j].BackColor = Color.Yellow;
-                                    for (int a = 0; a < 9; a++)
-                                        tiles[k, j].hintsLabel[a].BackColor = Color.Yellow;
                                 }
                             }
                             for (int l = 0; l < 9; l++)
@@ -163,8 +160,6 @@ namespace Sudoku
                                     if (l / 3 == i / 3 & m / 3 == j / 3 & !tiles[l, m].selected)
                                     {
                                         tiles[l, m].BackColor = Color.Yellow;
-                                        for (int a = 0; a < 9; a++)
-                                            tiles[l, m].hintsLabel[a].BackColor = Color.Yellow;
                                     }
 
                                 }
@@ -175,10 +170,17 @@ namespace Sudoku
             {
                 tile.selected = false;
                 tile.BackColor = Color.Yellow;
-                for (int a = 0; a < 9; a++)
-                    tile.hintsLabel[a].BackColor = Color.Yellow;
-            }                           
+            }    
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                {
+                    for (int k = 0; k < 9; k++)
+                    {
+                        tiles[i, j].hintsLabel[k].BackColor = tiles[i, j].BackColor;
+                    }
+                }
         }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             for (int i = 0; i < 9; i++)
@@ -188,9 +190,18 @@ namespace Sudoku
                 {
                     tiles[i, j] = new TileLabel(i, j, this);
                     this.Controls.Add(tiles[i, j]);
+                    puzzle[i, j] = File.ReadLines("puzzles.txt").ElementAt(j).ElementAt(i).ToString();
+                    solution[i, j] = File.ReadLines("puzzles.txt").ElementAt(j + 10).ElementAt(i).ToString();
                     tiles[i, j].MouseEnter += new EventHandler(tile_MouseEnter);
                     tiles[i, j].MouseLeave += new EventHandler(tile_MouseLeave);
                     tiles[i, j].Click += new EventHandler(tile_Click);
+                    if (puzzle[i, j] != "0")
+                    {
+                        tiles[i, j].Text = puzzle[i, j];
+                        tiles[i, j].given = true;
+                        tiles[i, j].ForeColor = Color.Black;
+                    }
+
                 }
             }
             numButtons[9] = "Back";
@@ -199,6 +210,7 @@ namespace Sudoku
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             string key = e.KeyCode.ToString();
+            int counter = 0;
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
                 {
@@ -209,16 +221,29 @@ namespace Sudoku
                             {
                                 if (Control.ModifierKeys == Keys.Shift)
                                 {
-                                    tiles[i, j].hintsLabel[k].Visible = true;
-                                    tiles[i, j].hintsLabel[k].Text = key.Remove(0, 1);
+                                    if (tiles[i, j].Text == "")
+                                    {
+                                        if (tiles[i, j].hintsLabel[k].Text != key.Remove(0, 1))
+                                        {
+                                            tiles[i, j].hintsLabel[k].Visible = true;
+                                            tiles[i, j].hintsLabel[k].Text = key.Remove(0, 1);
+                                        }
+                                        else
+                                        {
+                                            tiles[i, j].hintsLabel[k].Visible = false;
+                                            tiles[i, j].hintsLabel[k].Text = "";
+                                        }
+                                    }
+                                    else
+                                        tiles[i, j].hintsLabel[k].Visible = false;
                                 }
-                                else if (key == numButtons[9])
+                                else if (key == numButtons[9] & !tiles[i, j].given)
                                 {
                                     tiles[i, j].Text = "";
                                     for (int l = 0; l < 9; l++)
                                         tiles[i, j].hintsLabel[l].Visible = true;
                                 }
-                                else
+                                else if (!tiles[i, j].given)
                                 {
                                     tiles[i, j].Text = key.Remove(0, 1);
                                     for (int l = 0; l < 9; l++)
@@ -226,7 +251,19 @@ namespace Sudoku
                                 }
                             }
                     }
+
+                    if (tiles[i, j].Text != solution[i, j])
+                        counter += 1;
                 }
+            if (counter == 0)
+                for (int i = 0; i < 9; i++)
+                    for (int j = 0; j < 9; j++)
+                    {
+                        tiles[i, j].BackColor = Color.Green;
+                        tiles[i, j].Enabled = false;
+                    }
+            else
+                counter = 0;
         }
     }
 }
