@@ -13,10 +13,10 @@ namespace Sudoku
 {
     public partial class frmMain : Form
     {
-        TileLabel[,] tiles = new TileLabel[9, 9];
+        public TileLabel[,] tiles = new TileLabel[9, 9];
         string[] numButtons = new string[10];
-        string[,] puzzle = new string[9, 9];
-        string[,] solution = new string[9, 9];
+        public string[,] solution = new string[9, 9];
+        public Menu menu;
         public frmMain()
         {
             InitializeComponent();
@@ -190,17 +190,9 @@ namespace Sudoku
                 {
                     tiles[i, j] = new TileLabel(i, j, this);
                     this.Controls.Add(tiles[i, j]);
-                    puzzle[i, j] = File.ReadLines("puzzles.txt").ElementAt(j).ElementAt(i).ToString();
-                    solution[i, j] = File.ReadLines("puzzles.txt").ElementAt(j + 10).ElementAt(i).ToString();
                     tiles[i, j].MouseEnter += new EventHandler(tile_MouseEnter);
                     tiles[i, j].MouseLeave += new EventHandler(tile_MouseLeave);
                     tiles[i, j].Click += new EventHandler(tile_Click);
-                    if (puzzle[i, j] != "0")
-                    {
-                        tiles[i, j].Text = puzzle[i, j];
-                        tiles[i, j].given = true;
-                        tiles[i, j].ForeColor = Color.Black;
-                    }
 
                 }
             }
@@ -264,6 +256,11 @@ namespace Sudoku
                     }
             else
                 counter = 0;
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            menu.Close();
         }
     }
 }

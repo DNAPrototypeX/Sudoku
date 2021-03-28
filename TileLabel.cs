@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    class TileLabel: Label
+    public class TileLabel: Label
     {
         public Label[] hintsLabel;
         public bool selected;
