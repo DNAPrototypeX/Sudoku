@@ -231,6 +231,21 @@ namespace Sudoku
                                 }
                                 else if (key == numButtons[9] & !tiles[i, j].given)
                                 {
+                                    for (int a = 0; a < 9; a++)
+                                        for (int b = 0; b < 9; b++)
+                                            for (int c = b + 1; c < 9; c++)
+                                            {
+                                                if (tiles[a, b].Text == tiles[a, c].Text)
+                                                {
+                                                    tiles[a, b].ForeColor = Color.Black;
+                                                    tiles[a, c].ForeColor = Color.Black;
+                                                }
+                                                if (tiles[b, a].Text == tiles[c, a].Text)
+                                                {
+                                                    tiles[b, a].ForeColor = Color.Black;
+                                                    tiles[c, a].ForeColor = Color.Black;
+                                                }
+                                            }
                                     tiles[i, j].Text = "";
                                     for (int l = 0; l < 9; l++)
                                         tiles[i, j].hintsLabel[l].Visible = true;
@@ -243,6 +258,7 @@ namespace Sudoku
                                 }
                             }
                     }
+                    
 
                     if (tiles[i, j].Text != solution[i, j])
                         counter += 1;
@@ -256,11 +272,27 @@ namespace Sudoku
                     }
             else
                 counter = 0;
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                    for (int k = j + 1; k < 9; k++)
+                    {
+                        if (tiles[i, j].Text == tiles[i, k].Text & tiles[i, k].Text != "")
+                        {
+                            tiles[i, j].ForeColor = Color.Red;
+                            tiles[i, k].ForeColor = Color.Red;
+                        }
+                        if (tiles[j, i].Text == tiles[k, i].Text & tiles[k, i].Text != "")
+                        {
+                            tiles[j, i].ForeColor = Color.Red;
+                            tiles[k, i].ForeColor = Color.Red;
+                        }
+                    }
+
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            menu.Close();
+            menu.Visible = true;           
         }
     }
 }
