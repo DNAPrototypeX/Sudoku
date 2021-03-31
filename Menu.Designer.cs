@@ -44,6 +44,7 @@ namespace Sudoku
             this.tmrTitleColours = new System.Windows.Forms.Timer(this.components);
             this.ttpHowToPlay = new System.Windows.Forms.ToolTip(this.components);
             this.lblHowToPlay = new System.Windows.Forms.Label();
+            this.chkToggleMistakeHighlighting = new System.Windows.Forms.CheckBox();
             this.grpDifficulty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPuzzleNum)).BeginInit();
             this.SuspendLayout();
@@ -52,9 +53,10 @@ namespace Sudoku
             // 
             this.btnStart.BackColor = System.Drawing.Color.Lime;
             this.btnStart.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(155, 358);
+            this.btnStart.Location = new System.Drawing.Point(156, 373);
             this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
+            this.btnStart.Padding = new System.Windows.Forms.Padding(5);
             this.btnStart.Size = new System.Drawing.Size(190, 83);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
@@ -194,6 +196,20 @@ namespace Sudoku
             this.lblHowToPlay.TabIndex = 6;
             this.lblHowToPlay.Text = "?";
             // 
+            // chkToggleMistakeHighlighting
+            // 
+            this.chkToggleMistakeHighlighting.AutoSize = true;
+            this.chkToggleMistakeHighlighting.Checked = true;
+            this.chkToggleMistakeHighlighting.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkToggleMistakeHighlighting.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkToggleMistakeHighlighting.Location = new System.Drawing.Point(12, 461);
+            this.chkToggleMistakeHighlighting.Name = "chkToggleMistakeHighlighting";
+            this.chkToggleMistakeHighlighting.Size = new System.Drawing.Size(176, 27);
+            this.chkToggleMistakeHighlighting.TabIndex = 7;
+            this.chkToggleMistakeHighlighting.Text = "Mistake highlighting";
+            this.chkToggleMistakeHighlighting.UseVisualStyleBackColor = true;
+            this.chkToggleMistakeHighlighting.CheckedChanged += new System.EventHandler(this.chkToggleMistakeHighlighting_CheckedChanged);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +217,7 @@ namespace Sudoku
             this.BackgroundImage = global::Sudoku.Properties.Resources.sudoku_0;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(502, 500);
+            this.Controls.Add(this.chkToggleMistakeHighlighting);
             this.Controls.Add(this.lblHowToPlay);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblPuzzleNum);
@@ -238,5 +255,6 @@ namespace Sudoku
         private System.Windows.Forms.Timer tmrTitleColours;
         private System.Windows.Forms.ToolTip ttpHowToPlay;
         private System.Windows.Forms.Label lblHowToPlay;
+        private System.Windows.Forms.CheckBox chkToggleMistakeHighlighting;
     }
 }

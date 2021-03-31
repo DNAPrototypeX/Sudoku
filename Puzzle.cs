@@ -14,16 +14,18 @@ namespace Sudoku
         string[,] puzzle;
         string[,] solution;
         string puzzlesFile;
-        
+        TileLabel[,] tiles;
         public Puzzle()
         {
             puzzle = new string[9, 9];
-            solution = new string[9, 9];
+            solution = new string[9, 9];           
         }
 
 
         public void initializePuzzle(Menu menu, frmMain game, Difficulty difficulty, int puzzleNum)
         {
+            tiles  = game.getTilesArray();
+
             switch (difficulty)
             {
                 case Difficulty.Easy:
@@ -36,6 +38,7 @@ namespace Sudoku
                     puzzlesFile = "puzzles_hard.txt";
                     break;
             }
+
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
                 {
@@ -43,12 +46,18 @@ namespace Sudoku
                     solution[i, j] = File.ReadLines(puzzlesFile).ElementAt(j + (puzzleNum * 20) + 10).ElementAt(i).ToString();
                     if (puzzle[i, j] != "0")
                     {
-                        game.tiles[i, j].Text = puzzle[i, j];
-                        game.tiles[i, j].given = true;
-                        game.tiles[i, j].ForeColor = Color.Black;
+                        tiles[i, j].Text = puzzle[i, j];
+                        tiles[i, j].given = true;
+                        tiles[i, j].ForeColor = Color.Black;
                     }
+                    else
+                        tiles[i, j].Text = "";
                 }
-            game.solution = solution;
         }
+
+        public string[,] getSolution()
+        {
+            return solution;
+        } 
     }
 }

@@ -18,8 +18,7 @@ namespace Sudoku
         Hard
     }
     public partial class Menu : Form
-    {
-        Difficulty difficulty;
+    {        
         static Bitmap SetAlpha(Bitmap bmpIn, int alpha)
         {
             Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
@@ -58,7 +57,10 @@ namespace Sudoku
         int r = 255;
         int g = 0;
         int b = 0;
-        
+        Difficulty difficulty;
+        string[,] solution = new string[9, 9];
+        bool mistakeHighlighting;
+
         public Menu()
         {
             InitializeComponent();
@@ -75,16 +77,16 @@ namespace Sudoku
                 difficulty = Difficulty.Medium;
             else
                 difficulty = Difficulty.Hard;
-            frmMain game = new frmMain();
             Puzzle puzzle = new Puzzle();
+            frmMain game = new frmMain(this, puzzle.getSolution(), mistakeHighlighting);
             game.Visible = true;
-            game.menu = this;
-            puzzle.initializePuzzle(this, game, difficulty, (int)nudPuzzleNum.Value - 1);
+            puzzle.initializePuzzle(this, game, difficulty, (int)nudPuzzleNum.Value - 1);           
             this.Hide();
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            mistakeHighlighting = true;
             currentImage = menuImages[0];
             nextImage = menuImages[1];
             ttpHowToPlay.SetToolTip(lblHowToPlay, "Fill in the blank tiles such that each row,\n" +
@@ -170,6 +172,19 @@ namespace Sudoku
             tmrTitleColours.Enabled = true;
             currentImageCounter = 0;
             nextImageCounter = 0;
+        }
+
+        private void chkToggleMistakeHighlighting_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (chkToggleMistakeHighlighting.Checked)
+            {
+                case true:
+                    mistakeHighlighting = true;
+                    break;
+                case false:
+                    mistakeHighlighting = false;
+                    break;
+            }
         }
     }
 }
