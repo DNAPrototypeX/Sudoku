@@ -53,11 +53,11 @@ namespace Sudoku
             // 
             this.btnStart.BackColor = System.Drawing.Color.Lime;
             this.btnStart.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(156, 373);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStart.Location = new System.Drawing.Point(208, 459);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Padding = new System.Windows.Forms.Padding(5);
-            this.btnStart.Size = new System.Drawing.Size(190, 83);
+            this.btnStart.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.btnStart.Size = new System.Drawing.Size(253, 102);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
@@ -69,11 +69,11 @@ namespace Sudoku
             this.grpDifficulty.Controls.Add(this.radMedium);
             this.grpDifficulty.Controls.Add(this.radEasy);
             this.grpDifficulty.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDifficulty.Location = new System.Drawing.Point(70, 143);
-            this.grpDifficulty.Margin = new System.Windows.Forms.Padding(2);
+            this.grpDifficulty.Location = new System.Drawing.Point(93, 176);
+            this.grpDifficulty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpDifficulty.Name = "grpDifficulty";
-            this.grpDifficulty.Padding = new System.Windows.Forms.Padding(2);
-            this.grpDifficulty.Size = new System.Drawing.Size(154, 166);
+            this.grpDifficulty.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpDifficulty.Size = new System.Drawing.Size(205, 204);
             this.grpDifficulty.TabIndex = 1;
             this.grpDifficulty.TabStop = false;
             this.grpDifficulty.Text = "Difficulty:";
@@ -81,10 +81,10 @@ namespace Sudoku
             // radHard
             // 
             this.radHard.AutoSize = true;
-            this.radHard.Location = new System.Drawing.Point(0, 120);
-            this.radHard.Margin = new System.Windows.Forms.Padding(2);
+            this.radHard.Location = new System.Drawing.Point(0, 148);
+            this.radHard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radHard.Name = "radHard";
-            this.radHard.Size = new System.Drawing.Size(88, 37);
+            this.radHard.Size = new System.Drawing.Size(108, 46);
             this.radHard.TabIndex = 2;
             this.radHard.TabStop = true;
             this.radHard.Text = "Hard";
@@ -93,10 +93,10 @@ namespace Sudoku
             // radMedium
             // 
             this.radMedium.AutoSize = true;
-            this.radMedium.Location = new System.Drawing.Point(0, 79);
-            this.radMedium.Margin = new System.Windows.Forms.Padding(2);
+            this.radMedium.Location = new System.Drawing.Point(0, 97);
+            this.radMedium.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radMedium.Name = "radMedium";
-            this.radMedium.Size = new System.Drawing.Size(118, 37);
+            this.radMedium.Size = new System.Drawing.Size(144, 46);
             this.radMedium.TabIndex = 1;
             this.radMedium.TabStop = true;
             this.radMedium.Text = "Medium";
@@ -106,10 +106,10 @@ namespace Sudoku
             // 
             this.radEasy.AutoSize = true;
             this.radEasy.Checked = true;
-            this.radEasy.Location = new System.Drawing.Point(0, 38);
-            this.radEasy.Margin = new System.Windows.Forms.Padding(2);
+            this.radEasy.Location = new System.Drawing.Point(0, 47);
+            this.radEasy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radEasy.Name = "radEasy";
-            this.radEasy.Size = new System.Drawing.Size(85, 37);
+            this.radEasy.Size = new System.Drawing.Size(104, 46);
             this.radEasy.TabIndex = 0;
             this.radEasy.TabStop = true;
             this.radEasy.Text = "Easy";
@@ -118,8 +118,8 @@ namespace Sudoku
             // nudPuzzleNum
             // 
             this.nudPuzzleNum.Font = new System.Drawing.Font("Comic Sans MS", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPuzzleNum.Location = new System.Drawing.Point(338, 194);
-            this.nudPuzzleNum.Margin = new System.Windows.Forms.Padding(2);
+            this.nudPuzzleNum.Location = new System.Drawing.Point(451, 239);
+            this.nudPuzzleNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudPuzzleNum.Maximum = new decimal(new int[] {
             3,
             0,
@@ -131,7 +131,7 @@ namespace Sudoku
             0,
             0});
             this.nudPuzzleNum.Name = "nudPuzzleNum";
-            this.nudPuzzleNum.Size = new System.Drawing.Size(41, 48);
+            this.nudPuzzleNum.Size = new System.Drawing.Size(55, 58);
             this.nudPuzzleNum.TabIndex = 3;
             this.nudPuzzleNum.Value = new decimal(new int[] {
             1,
@@ -143,10 +143,9 @@ namespace Sudoku
             // 
             this.lblPuzzleNum.AutoSize = true;
             this.lblPuzzleNum.Font = new System.Drawing.Font("Comic Sans MS", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPuzzleNum.Location = new System.Drawing.Point(289, 143);
-            this.lblPuzzleNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPuzzleNum.Location = new System.Drawing.Point(385, 176);
             this.lblPuzzleNum.Name = "lblPuzzleNum";
-            this.lblPuzzleNum.Size = new System.Drawing.Size(145, 40);
+            this.lblPuzzleNum.Size = new System.Drawing.Size(184, 52);
             this.lblPuzzleNum.TabIndex = 4;
             this.lblPuzzleNum.Text = "Puzzle #:";
             // 
@@ -166,9 +165,10 @@ namespace Sudoku
             this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Comic Sans MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(31, 22);
+            this.lblTitle.Location = new System.Drawing.Point(41, 27);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(447, 90);
+            this.lblTitle.Size = new System.Drawing.Size(559, 112);
             this.lblTitle.TabIndex = 5;
             this.lblTitle.Text = "Paul\'s Sudoku";
             // 
@@ -190,9 +190,10 @@ namespace Sudoku
             // 
             this.lblHowToPlay.AutoSize = true;
             this.lblHowToPlay.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHowToPlay.Location = new System.Drawing.Point(465, 9);
+            this.lblHowToPlay.Location = new System.Drawing.Point(620, 11);
+            this.lblHowToPlay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHowToPlay.Name = "lblHowToPlay";
-            this.lblHowToPlay.Size = new System.Drawing.Size(25, 30);
+            this.lblHowToPlay.Size = new System.Drawing.Size(32, 38);
             this.lblHowToPlay.TabIndex = 6;
             this.lblHowToPlay.Text = "?";
             // 
@@ -202,9 +203,10 @@ namespace Sudoku
             this.chkToggleMistakeHighlighting.Checked = true;
             this.chkToggleMistakeHighlighting.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkToggleMistakeHighlighting.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkToggleMistakeHighlighting.Location = new System.Drawing.Point(12, 461);
+            this.chkToggleMistakeHighlighting.Location = new System.Drawing.Point(16, 567);
+            this.chkToggleMistakeHighlighting.Margin = new System.Windows.Forms.Padding(4);
             this.chkToggleMistakeHighlighting.Name = "chkToggleMistakeHighlighting";
-            this.chkToggleMistakeHighlighting.Size = new System.Drawing.Size(176, 27);
+            this.chkToggleMistakeHighlighting.Size = new System.Drawing.Size(224, 32);
             this.chkToggleMistakeHighlighting.TabIndex = 7;
             this.chkToggleMistakeHighlighting.Text = "Mistake highlighting";
             this.chkToggleMistakeHighlighting.UseVisualStyleBackColor = true;
@@ -212,11 +214,11 @@ namespace Sudoku
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Sudoku.Properties.Resources.sudoku_0;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(502, 500);
+            this.ClientSize = new System.Drawing.Size(669, 615);
             this.Controls.Add(this.chkToggleMistakeHighlighting);
             this.Controls.Add(this.lblHowToPlay);
             this.Controls.Add(this.lblTitle);
@@ -227,7 +229,7 @@ namespace Sudoku
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Menu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);

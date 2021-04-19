@@ -101,6 +101,7 @@
     <Content Include="bin\Debug\puzzles_easy.txt" />
     <Content Include="bin\Debug\puzzles_hard.txt" />
     <Content Include="bin\Debug\puzzles_medium.txt" />
+    <Content Include="bin\Debug\saved_game.txt" />
     <None Include="Resources\sudoku 5.PNG" />
     <None Include="Resources\sudoku 4.PNG" />
     <None Include="Resources\sudoku 3.PNG" />

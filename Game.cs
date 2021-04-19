@@ -16,12 +16,31 @@ namespace Sudoku
         TileLabel[,] tiles = new TileLabel[9, 9];
         string[] numButtons = new string[10];
         string[,] solution = new string[9, 9];
+        string[,] puzzle = new string[9, 9];
+        string[] puzzleToSave = new string[10];
+        string[] gameToSave = new string[9];
+        string[,] gameToLoad = new string[9, 9];
+        string[] solutionToSave = new string[10];
         Menu menu;
         bool mistakeHighlighting;
 
         public TileLabel[,] getTilesArray()
         {
             return tiles;
+        }
+        private void clearAllTiles()
+        {
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                {
+                    if (!tiles[i, j].given)
+                    {
+                        tiles[i, j].Text = "";
+                        tiles[i, j].ForeColor = Color.FromArgb(64, 64, 64);
+                    }
+                    else
+                        tiles[i, j].ForeColor = Color.Black;
+                }
         }
         private void selectTile(TileLabel tile)
         {
@@ -206,6 +225,59 @@ namespace Sudoku
                         tiles[i, j].Enabled = false;
                     }
         }
+        private void saveGame()
+        {
+            solutionToSave[0] = "";
+            puzzleToSave[0] = "";
+            File.WriteAllText("saved_game.txt", "");
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    solutionToSave[i + 1] += solution[j, i];
+                    gameToSave[i] += tiles[j, i].Text;
+                    if (tiles[j, i].Text == "")
+                        gameToSave[i] += "0";
+                    if (tiles[j, i].given)
+                        puzzleToSave[i + 1] += tiles[j, i].Text;
+                    else
+                        puzzleToSave[i + 1] += "0";
+                }
+            }
+            File.AppendAllLines("saved_game.txt", gameToSave);
+            File.AppendAllLines("saved_game.txt", puzzleToSave);
+            File.AppendAllLines("saved_game.txt", solutionToSave);
+        }
+        private void loadGame()
+        {
+            for (int i = 0; i < 9; i++)
+                for (int j = 0; j < 9; j++)
+                {
+                    gameToLoad[i, j] = File.ReadLines("saved_game.txt").ElementAt(j).ElementAt(i).ToString();
+                    puzzle[i, j] = File.ReadLines("saved_game.txt").ElementAt(j + 10).ElementAt(i).ToString();
+                    solution[i, j] = File.ReadLines("saved_game.txt").ElementAt(j + 20).ElementAt(i).ToString();
+                    if (puzzle[i, j] != "0")
+                    {
+                        tiles[i, j].Text = puzzle[i, j];
+                        tiles[i, j].given = true;
+                        tiles[i, j].ForeColor = Color.Black;
+                    }
+                    else
+                        tiles[i, j].Text = "";
+                    if (!tiles[i, j].given & gameToLoad[i, j] != "0")
+                        tiles[i, j].Text = gameToLoad[i, j];
+                }
+        }
+
+        private void resetSaveArrays()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                gameToSave[i] = "";
+                puzzleToSave[i + 1] = "";
+                solutionToSave[i + 1] = "";
+            }
+        }
 
         public frmMain(Menu frmMenu, string[,] puzzleSolution, bool toggleMistakeHighlighting)
         {
@@ -269,6 +341,8 @@ namespace Sudoku
                 }
             }
             numButtons[9] = "Back";
+            if (File.ReadAllText("saved_game.txt") != "")
+                btnLoad.Enabled = true;
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
@@ -295,6 +369,7 @@ namespace Sudoku
                                 }
                                 else if (!tiles[i, j].given)
                                 {
+                                    handleMistakeHighlighting(i, j, false);
                                     tiles[i, j].Text = key.Remove(0, 1);
                                     handleMistakeHighlighting(i, j, true);
                                     for (int l = 0; l < 9; l++)
@@ -308,7 +383,32 @@ namespace Sudoku
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            menu.Visible = true;           
+            menu.Visible = true;          
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            clearAllTiles();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            resetSaveArrays();
+            saveGame();
+            btnLoad.Enabled = true;
+            btnDelSave.Enabled = true;
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            loadGame();
+        }
+
+        private void btnDelSave_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText("saved_game.txt", "");
+            btnLoad.Enabled = false;
+            btnDelSave.Enabled = false;
         }
     }
 }
