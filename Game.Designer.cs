@@ -53,6 +53,14 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.btnDelSave = new System.Windows.Forms.Button();
+            this.grpColor = new System.Windows.Forms.GroupBox();
+            this.trkR = new System.Windows.Forms.TrackBar();
+            this.trkG = new System.Windows.Forms.TrackBar();
+            this.trkB = new System.Windows.Forms.TrackBar();
+            this.lblR = new System.Windows.Forms.Label();
+            this.lblG = new System.Windows.Forms.Label();
+            this.lblB = new System.Windows.Forms.Label();
+            this.btnApplyColour = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -73,6 +81,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
+            this.grpColor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkB)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox19
@@ -324,12 +336,96 @@
             this.btnDelSave.UseVisualStyleBackColor = false;
             this.btnDelSave.Click += new System.EventHandler(this.btnDelSave_Click);
             // 
+            // grpColor
+            // 
+            this.grpColor.BackColor = System.Drawing.Color.Cyan;
+            this.grpColor.Controls.Add(this.btnApplyColour);
+            this.grpColor.Controls.Add(this.lblB);
+            this.grpColor.Controls.Add(this.lblG);
+            this.grpColor.Controls.Add(this.lblR);
+            this.grpColor.Controls.Add(this.trkB);
+            this.grpColor.Controls.Add(this.trkG);
+            this.grpColor.Controls.Add(this.trkR);
+            this.grpColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpColor.Location = new System.Drawing.Point(674, 332);
+            this.grpColor.Name = "grpColor";
+            this.grpColor.Size = new System.Drawing.Size(101, 277);
+            this.grpColor.TabIndex = 24;
+            this.grpColor.TabStop = false;
+            this.grpColor.Text = "Change player text colour";
+            // 
+            // trkR
+            // 
+            this.trkR.Location = new System.Drawing.Point(0, 85);
+            this.trkR.Maximum = 255;
+            this.trkR.Name = "trkR";
+            this.trkR.Size = new System.Drawing.Size(104, 56);
+            this.trkR.TabIndex = 0;
+            this.trkR.ValueChanged += new System.EventHandler(this.trkR_ValueChanged);
+            // 
+            // trkG
+            // 
+            this.trkG.Location = new System.Drawing.Point(0, 147);
+            this.trkG.Maximum = 255;
+            this.trkG.Name = "trkG";
+            this.trkG.Size = new System.Drawing.Size(104, 56);
+            this.trkG.TabIndex = 1;
+            this.trkG.ValueChanged += new System.EventHandler(this.trkG_ValueChanged);
+            // 
+            // trkB
+            // 
+            this.trkB.Location = new System.Drawing.Point(0, 206);
+            this.trkB.Maximum = 255;
+            this.trkB.Name = "trkB";
+            this.trkB.Size = new System.Drawing.Size(104, 56);
+            this.trkB.TabIndex = 2;
+            this.trkB.ValueChanged += new System.EventHandler(this.trkB_ValueChanged);
+            // 
+            // lblR
+            // 
+            this.lblR.AutoSize = true;
+            this.lblR.Location = new System.Drawing.Point(42, 68);
+            this.lblR.Name = "lblR";
+            this.lblR.Size = new System.Drawing.Size(21, 20);
+            this.lblR.TabIndex = 25;
+            this.lblR.Text = "R";
+            // 
+            // lblG
+            // 
+            this.lblG.AutoSize = true;
+            this.lblG.Location = new System.Drawing.Point(42, 121);
+            this.lblG.Name = "lblG";
+            this.lblG.Size = new System.Drawing.Size(22, 20);
+            this.lblG.TabIndex = 26;
+            this.lblG.Text = "G";
+            // 
+            // lblB
+            // 
+            this.lblB.AutoSize = true;
+            this.lblB.Location = new System.Drawing.Point(43, 183);
+            this.lblB.Name = "lblB";
+            this.lblB.Size = new System.Drawing.Size(21, 20);
+            this.lblB.TabIndex = 27;
+            this.lblB.Text = "B";
+            // 
+            // btnApplyColour
+            // 
+            this.btnApplyColour.BackColor = System.Drawing.Color.Lime;
+            this.btnApplyColour.Location = new System.Drawing.Point(6, 242);
+            this.btnApplyColour.Name = "btnApplyColour";
+            this.btnApplyColour.Size = new System.Drawing.Size(89, 29);
+            this.btnApplyColour.TabIndex = 28;
+            this.btnApplyColour.Text = "Apply";
+            this.btnApplyColour.UseVisualStyleBackColor = false;
+            this.btnApplyColour.Click += new System.EventHandler(this.btnApplyColour_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(781, 615);
+            this.Controls.Add(this.grpColor);
             this.Controls.Add(this.btnDelSave);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnReset);
@@ -382,6 +478,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
+            this.grpColor.ResumeLayout(false);
+            this.grpColor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,6 +513,14 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnDelSave;
+        private System.Windows.Forms.GroupBox grpColor;
+        private System.Windows.Forms.Button btnApplyColour;
+        private System.Windows.Forms.Label lblB;
+        private System.Windows.Forms.Label lblG;
+        private System.Windows.Forms.Label lblR;
+        private System.Windows.Forms.TrackBar trkB;
+        private System.Windows.Forms.TrackBar trkG;
+        private System.Windows.Forms.TrackBar trkR;
     }
 }
 

@@ -23,6 +23,7 @@ namespace Sudoku
         string[] solutionToSave = new string[10];
         Menu menu;
         bool mistakeHighlighting;
+        Color playerColor = Color.Blue;
 
         public TileLabel[,] getTilesArray()
         {
@@ -36,7 +37,7 @@ namespace Sudoku
                     if (!tiles[i, j].given)
                     {
                         tiles[i, j].Text = "";
-                        tiles[i, j].ForeColor = Color.FromArgb(64, 64, 64);
+                        tiles[i, j].ForeColor = playerColor;
                     }
                     else
                         tiles[i, j].ForeColor = Color.Black;
@@ -149,7 +150,7 @@ namespace Sudoku
                         break;
                     case false:
                         givenNumColor = Color.Black;
-                        playerNumColor = Color.FromArgb(64, 64, 64);
+                        playerNumColor = playerColor;
                         break;
                 }
 
@@ -253,6 +254,7 @@ namespace Sudoku
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
                 {
+                    tiles[i, j].given = false;
                     gameToLoad[i, j] = File.ReadLines("saved_game.txt").ElementAt(j).ElementAt(i).ToString();
                     puzzle[i, j] = File.ReadLines("saved_game.txt").ElementAt(j + 10).ElementAt(i).ToString();
                     solution[i, j] = File.ReadLines("saved_game.txt").ElementAt(j + 20).ElementAt(i).ToString();
@@ -409,6 +411,32 @@ namespace Sudoku
             File.WriteAllText("saved_game.txt", "");
             btnLoad.Enabled = false;
             btnDelSave.Enabled = false;
+        }
+
+        private void btnApplyColour_Click(object sender, EventArgs e)
+        {
+            playerColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
+            for (int i = 0; i < 9; i++)
+                for(int j = 0; j < 9; j++)
+                {
+                    if (!tiles[i, j].given)
+                        tiles[i, j].ForeColor = playerColor;
+                }
+        }
+
+        private void trkR_ValueChanged(object sender, EventArgs e)
+        {
+            btnApplyColour.BackColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
+        }
+
+        private void trkG_ValueChanged(object sender, EventArgs e)
+        {
+            btnApplyColour.BackColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
+        }
+
+        private void trkB_ValueChanged(object sender, EventArgs e)
+        {
+            btnApplyColour.BackColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
         }
     }
 }

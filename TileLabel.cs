@@ -34,7 +34,7 @@ namespace Sudoku
             AutoSize = false;
             TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             Font = new Font("Microsoft Sans Serif", 28, FontStyle.Regular);
-            ForeColor = Color.FromArgb(64, 64, 64);
+            ForeColor = Color.Blue;
             selected = false;
             given = false;
             hintsLabel = new Label[9];            
