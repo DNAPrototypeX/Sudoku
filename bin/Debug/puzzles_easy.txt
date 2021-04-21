@@ -56,4 +56,4 @@
 234971685
 483267159
 912453768
-576819234
+576819234 //More puzzles can be added here as long as they are in the same format as above.

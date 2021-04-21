@@ -29,7 +29,7 @@ namespace Sudoku
         {
             return tiles;
         }
-        private void clearAllTiles()
+        private void clearAllTiles() // Erases all player inputted numbers and reset's any mistake-highlighted given tiles.
         {
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
@@ -43,7 +43,8 @@ namespace Sudoku
                         tiles[i, j].ForeColor = Color.Black;
                 }
         }
-        private void selectTile(TileLabel tile)
+        private void selectTile(TileLabel tile) // "selects" the tile the user clicks, making it orange and flagging it as selected.
+                                                //Also highlights the row collumn and 3x3 square in yellow.
         {
             tile.selected = true;
             tile.BackColor = Color.Orange;
@@ -55,18 +56,18 @@ namespace Sudoku
                         for (int k = 0; k < 9; k++)
                         {
                             if (!tiles[i, k].selected)
-                            {
+                            {                                               //Row
                                 tiles[i, k].BackColor = Color.Yellow;
                             }
                             if (!tiles[k, j].selected)
-                            {
+                            {                                               //Collumn
                                 tiles[k, j].BackColor = Color.Yellow;
                             }
                         }
                         for (int l = 0; l < 9; l++)
                             for (int m = 0; m < 9; m++)
                             {
-                                if (l / 3 == i / 3 & m / 3 == j / 3 & !tiles[l, m].selected)
+                                if (l / 3 == i / 3 & m / 3 == j / 3 & !tiles[l, m].selected)        //3x3 square
                                 {
                                     tiles[l, m].BackColor = Color.Yellow;
                                 }
@@ -75,7 +76,7 @@ namespace Sudoku
                 }
         }
 
-        private void matchHintandTileColor()
+        private void matchHintandTileColor()        //matches the hint/pencil mark labels' backColor properties. 
         {
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
@@ -87,15 +88,15 @@ namespace Sudoku
                 }
         }
 
-        private void higlightTiles(object sender, Color color)
+        private void higlightTiles(object sender, Color color)  //highlights the row collumn and 3x3 of the sender in the color inputted.
         {
             var tile = (TileLabel)sender;
             int counter = 0;
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
-                {
-                    if (tiles[i, j].selected)
-                        counter += 1;
+                {                                   //Checks to make sure there are no selected tiles before highlighting
+                    if (tiles[i, j].selected)       //(this method is used in the mouse enter event and when a tile is selected,
+                        counter += 1;               // only the selected tile's row, collumn, 3x3 should be highlighted).
                 }
             if (counter == 0)
             {
@@ -106,39 +107,28 @@ namespace Sudoku
                         {
                             for (int k = 0; k < 9; k++)
                             {
-                                if (!tiles[i, k].selected)
-                                {
-                                    tiles[i, k].BackColor = color;
-                                    for (int a = 0; a < 9; a++)
-                                        tiles[i, k].hintsLabel[a].BackColor = color;
-                                }
-                                if (!tiles[k, j].selected)
-                                {
-                                    tiles[k, j].BackColor = color;
-                                    for (int a = 0; a < 9; a++)
-                                        tiles[k, j].hintsLabel[a].BackColor = color;
-                                }
+                                tiles[i, k].BackColor = color;          //Row
+                                tiles[k, j].BackColor = color;          //Collumn
                             }
                             for (int l = 0; l < 9; l++)
                                 for (int m = 0; m < 9; m++)
                                 {
-                                    if (l / 3 == i / 3 & m / 3 == j / 3 & !tiles[l, m].selected)
+                                    if (l / 3 == i / 3 & m / 3 == j / 3)
                                     {
-                                        tiles[l, m].BackColor = color;
-                                        for (int a = 0; a < 9; a++)
-                                            tiles[l, m].hintsLabel[a].BackColor = color;
+                                        tiles[l, m].BackColor = color;      //3x3
                                     }
                                 }
                         }
                     }
+                matchHintandTileColor();
             }
             else
                 counter = 0;
         }
 
-        private void handleMistakeHighlighting(int i, int j, bool isHighlighting)
-        {
-            if (mistakeHighlighting)
+        private void handleMistakeHighlighting(int i, int j, bool isHighlighting)   //Changes the foreColor property of the selected tile and all tiles in the
+        {                                                                           //same row, collumn, 3x3 with the same number
+            if (mistakeHighlighting)                                                //to Red or DarkRed (if the tile is not given or given, respectively).
             {
                 Color givenNumColor = Color.Black;
                 Color playerNumColor = Color.Black;
@@ -156,7 +146,7 @@ namespace Sudoku
 
                 for (int k = 0; k < 9; k++)
                 {
-                    if (tiles[i, j].Text == tiles[i, k].Text & tiles[i, k].Text != "" & j != k)
+                    if (tiles[i, j].Text == tiles[i, k].Text & tiles[i, k].Text != "" & j != k)     //Row
                     {
                         tiles[i, j].ForeColor = playerNumColor;
                         if (tiles[i, k].given)
@@ -165,7 +155,7 @@ namespace Sudoku
                             tiles[i, k].ForeColor = playerNumColor;
                     }
 
-                    if (tiles[i, j].Text == tiles[k, j].Text & tiles[k, j].Text != "" & i != k)
+                    if (tiles[i, j].Text == tiles[k, j].Text & tiles[k, j].Text != "" & i != k)     //Collumn
                     {
                         tiles[i, j].ForeColor = playerNumColor;
                         if (tiles[k, j].given)
@@ -180,7 +170,7 @@ namespace Sudoku
                     {
                         if (l / 3 == i / 3 & m / 3 == j / 3 & tiles[i, j].Text == tiles[l, m].Text & tiles[l, m].Text != "" & l != i & m != j)
                         {
-                            if (tiles[l, m].given)
+                            if (tiles[l, m].given)                                                  //3x3
                                 tiles[l, m].ForeColor = givenNumColor;
                             else
                                 tiles[l, m].ForeColor = playerNumColor;
@@ -191,7 +181,7 @@ namespace Sudoku
             
         }
 
-        private void toggleHint(string key, int i, int j, int k)
+        private void toggleHint(string key, int i, int j, int k)        //Adds/removes a hint/pencil mark.
         {
             if (tiles[i, j].Text == "")
             {
@@ -210,7 +200,7 @@ namespace Sudoku
                 tiles[i, j].hintsLabel[k].Visible = false;
         }
 
-        private void checkForWin()
+        private void checkForWin()              //Compares current state of the puzzle to the solution. If they are the same, colour all tiles green.
         {
             int counter = 0;
             for (int i = 0; i < 9; i++)
@@ -226,7 +216,7 @@ namespace Sudoku
                         tiles[i, j].Enabled = false;
                     }
         }
-        private void saveGame()
+        private void saveGame()                     //saves the original puzzle, current game and solution to the "saved_game.txt" file.
         {
             solutionToSave[0] = "";
             puzzleToSave[0] = "";
@@ -249,7 +239,7 @@ namespace Sudoku
             File.AppendAllLines("saved_game.txt", puzzleToSave);
             File.AppendAllLines("saved_game.txt", solutionToSave);
         }
-        private void loadGame()
+        private void loadGame()                                              //Loads the puzzle state and solution from the "saved_game.txt" file.
         {
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
@@ -271,7 +261,7 @@ namespace Sudoku
                 }
         }
 
-        private void resetSaveArrays()
+        private void resetSaveArrays()          //Clears the arrays used to convert from 2d array to strings
         {
             for (int i = 0; i < 9; i++)
             {
@@ -413,7 +403,7 @@ namespace Sudoku
             btnDelSave.Enabled = false;
         }
 
-        private void btnApplyColour_Click(object sender, EventArgs e)
+        private void btnApplyColour_Click(object sender, EventArgs e)                             //Applies custom colour
         {
             playerColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
             for (int i = 0; i < 9; i++)
@@ -424,7 +414,7 @@ namespace Sudoku
                 }
         }
 
-        private void trkR_ValueChanged(object sender, EventArgs e)
+        private void trkR_ValueChanged(object sender, EventArgs e)                                  //Customize playercolor feature.
         {
             btnApplyColour.BackColor = Color.FromArgb(trkR.Value, trkG.Value, trkB.Value);
         }

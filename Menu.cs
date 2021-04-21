@@ -20,7 +20,7 @@ namespace Sudoku
     }
     public partial class Menu : Form
     {        
-        static Bitmap SetAlpha(Bitmap bmpIn, int alpha)
+        static Bitmap SetAlpha(Bitmap bmpIn, int alpha)             //Mehtod I stole from stack overflow to change the alpha/transparency of a bitmap.
         {
             Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
             Rectangle rect = new Rectangle(0, 0, bmpIn.Width, bmpIn.Height);
@@ -42,6 +42,7 @@ namespace Sudoku
 
             return bmpOut;
         }
+
         int currentImageCounter = 0;
         int nextImageCounter = 0;
         List<Bitmap> menuImages = new List<Bitmap>
@@ -67,7 +68,7 @@ namespace Sudoku
             InitializeComponent();
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)         //Starts the game
         {
             tmrInterval.Enabled = false;
             tmrFade.Enabled = false;
@@ -87,6 +88,7 @@ namespace Sudoku
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            nudPuzzleNum.Maximum = File.ReadLines("puzzles_easy.txt").ToArray().Length / 19;
             mistakeHighlighting = true;
             currentImage = menuImages[0];
             nextImage = menuImages[1];
@@ -99,8 +101,8 @@ namespace Sudoku
                 " and it will appear as a small number.");
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
+        private void timer1_Tick(object sender, EventArgs e)        //I don't know why this is called timer1, it should say tmrInterval
+        {                                                           //Waits 5 seconds between fading to the next image.
             currentImageCounter += 1;
             if (currentImageCounter == 500)
             {
@@ -110,7 +112,7 @@ namespace Sudoku
             }
         }
 
-        private void tmrFade_Tick(object sender, EventArgs e)
+        private void tmrFade_Tick(object sender, EventArgs e)       //uses the SetAlpha method to fade in/out of the title screen images.
         {
             currentImageCounter += 1; 
             if (currentImageCounter <= 255)
@@ -146,7 +148,7 @@ namespace Sudoku
 
         }
 
-        private void tmrTitleColours_Tick(object sender, EventArgs e)
+        private void tmrTitleColours_Tick(object sender, EventArgs e)       //Funny colour fade button
         {
             if (r > 0 & b == 0)
             {
@@ -167,7 +169,7 @@ namespace Sudoku
             btnStart.BackColor = Color.FromArgb(r, g, b);
         }
 
-        private void Menu_VisibleChanged(object sender, EventArgs e)
+        private void Menu_VisibleChanged(object sender, EventArgs e)    //re-activates the image fade when the player exits the puzzle.
         {
             tmrInterval.Enabled = true;
             tmrTitleColours.Enabled = true;
@@ -175,7 +177,7 @@ namespace Sudoku
             nextImageCounter = 0;
         }
 
-        private void chkToggleMistakeHighlighting_CheckedChanged(object sender, EventArgs e)
+        private void chkToggleMistakeHighlighting_CheckedChanged(object sender, EventArgs e)        //toggle the mistake highlighting feature.
         {
             switch (chkToggleMistakeHighlighting.Checked)
             {
@@ -185,6 +187,30 @@ namespace Sudoku
                 case false:
                     mistakeHighlighting = false;
                     break;
+            }
+        }
+
+        private void radEasy_CheckedChanged(object sender, EventArgs e)     //Makes it so I can easily add new puzzles in the future by automatically setting the max value
+        {                                                                   // of nudPuzzleNum
+            if (radEasy.Checked)
+            {
+                nudPuzzleNum.Maximum = File.ReadLines("puzzles_easy.txt").ToArray().Length / 19;
+            }
+        }
+
+        private void radMedium_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radMedium.Checked)
+            {
+                nudPuzzleNum.Maximum = File.ReadLines("puzzles_medium.txt").ToArray().Length / 19;
+            }
+        }
+
+        private void radHard_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radHard.Checked)
+            {
+                nudPuzzleNum.Maximum = File.ReadLines("puzzles_hard.txt").ToArray().Length / 19;
             }
         }
     }

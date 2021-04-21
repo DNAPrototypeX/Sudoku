@@ -42,12 +42,12 @@ namespace Sudoku
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
                 {
-                    puzzle[i, j] = File.ReadLines(puzzlesFile).ElementAt(j + (puzzleNum * 20)).ElementAt(i).ToString();
-                    solution[i, j] = File.ReadLines(puzzlesFile).ElementAt(j + (puzzleNum * 20) + 10).ElementAt(i).ToString();
+                    puzzle[i, j] = File.ReadLines(puzzlesFile).ElementAt(j + (puzzleNum * 20)).ElementAt(i).ToString();         //reads the correct file and puzzle selected by the player
+                    solution[i, j] = File.ReadLines(puzzlesFile).ElementAt(j + (puzzleNum * 20) + 10).ElementAt(i).ToString();  //in the menu.
                     if (puzzle[i, j] != "0")
                     {
                         tiles[i, j].Text = puzzle[i, j];
-                        tiles[i, j].given = true;
+                        tiles[i, j].given = true;                   //putting the puzzle onto the board
                         tiles[i, j].ForeColor = Color.Black;
                     }
                     else

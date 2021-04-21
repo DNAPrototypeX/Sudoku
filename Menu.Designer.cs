@@ -89,6 +89,7 @@ namespace Sudoku
             this.radHard.TabStop = true;
             this.radHard.Text = "Hard";
             this.radHard.UseVisualStyleBackColor = true;
+            this.radHard.CheckedChanged += new System.EventHandler(this.radHard_CheckedChanged);
             // 
             // radMedium
             // 
@@ -101,6 +102,7 @@ namespace Sudoku
             this.radMedium.TabStop = true;
             this.radMedium.Text = "Medium";
             this.radMedium.UseVisualStyleBackColor = true;
+            this.radMedium.CheckedChanged += new System.EventHandler(this.radMedium_CheckedChanged);
             // 
             // radEasy
             // 
@@ -114,6 +116,7 @@ namespace Sudoku
             this.radEasy.TabStop = true;
             this.radEasy.Text = "Easy";
             this.radEasy.UseVisualStyleBackColor = true;
+            this.radEasy.CheckedChanged += new System.EventHandler(this.radEasy_CheckedChanged);
             // 
             // nudPuzzleNum
             // 

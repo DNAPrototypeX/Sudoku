@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public class TileLabel: Label
+    public class TileLabel: Label           //Custom label class so I can have extra properties for my sudoku tiles.
     {
         public Label[] hintsLabel;
         public bool selected;
         public bool given;
-        private void hintLabel_MouseEnter(object sender, System.EventArgs e)
+        private void hintLabel_MouseEnter(object sender, System.EventArgs e)        //Passes the mouseEnter event to the parent TileLabel.
         {
             OnMouseEnter(e);
         }
@@ -23,7 +23,7 @@ namespace Sudoku
             OnMouseLeave(e);
         }
 
-        private void hintLabel_Click(object sender, System.EventArgs e)
+        private void hintLabel_Click(object sender, System.EventArgs e)             //passes the click event to the parent TileLabel
         {
             OnClick(e);
         }
